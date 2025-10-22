@@ -1,0 +1,1594 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+/* Make sure this file is processed by Tailwind CSS via PostCSS, not directly by the browser. */
+
+/* --- Global & Body Styles --- */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #FCF9F6;
+    color: #504646;
+    font-family: var(--font-inter), sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-playfair-display), serif;
+}
+.page-container {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 3rem;
+}
+
+@media (max-width: 768px) {
+    .page-container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+@media (max-width: 640px) {
+    .page-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* --- Styles for React Type Animation --- */
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* This class creates a solid cursor using a pseudo-element */
+.solid-cursor::after {
+  content: '|';
+  display: inline-block;
+  animation: none;
+  opacity: 1;
+  color: #173F25;
+  margin-left: 4px; /* Adjust spacing of the cursor */
+}
+
+/* This class is added by the component to start the blinking */
+.blinking::after {
+  animation: blink 1s step-end infinite;
+}
+
+/* --- Homepage Hero Banner & Carousel --- */
+.hero-banner {
+    background-color: #e8d2be;
+    border-radius: 26px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    overflow: hidden;
+}
+@media (min-width: 1024px) {
+    .hero-banner {
+        padding: 4rem 6rem;
+    }
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+    width: 100%;
+}
+
+.hero-text {
+    flex: 1 1 50%;
+    text-align: center;
+}
+
+.hero-text h1 {
+    font-size: 4.5rem;
+    color: #ffffff;
+    line-height: 1;
+    position: relative;
+    isolation: isolate;
+}
+@media (min-width: 768px) {
+    .hero-text h1 {
+        font-size: 8rem;
+    }
+}
+.hero-text h1::before {
+    content: 'MaBook';
+    position: absolute;
+    z-index: -1;
+    color: transparent;
+    -webkit-text-stroke: 2px #88b888;
+    transform: translate(5px, 5px);
+    top: 0; left: 0; width: 100%;
+}
+@media (min-width: 768px) {
+    .hero-text h1::before {
+        -webkit-text-stroke: 3px #88b888;
+        transform: translate(10px, 10px);
+    }
+}
+
+.hero-text p {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    color: #504646;
+}
+
+/* Find and replace this rule */
+.hero-books {
+    flex: 1 1 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 0;
+    /* Add the following two lines */
+    padding-top: 2.5rem;   /* Increased padding */
+    padding-bottom: 2rem; /* Increased padding */
+}
+
+/* Styles for the Book Carousel Component */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding-top: 1.5rem;    /* This creates space for the book to scale up */
+    padding-bottom: 1.5rem; /* This creates space for the book to scale down */
+}
+.book-carousel {
+    display: flex;
+}
+/* Find the old .hero-books .book-item rule and replace it with this */
+.hero-books .book-item {
+    flex: 0 0 200px;
+    margin: 0 10px;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Add this new rule for mobile devices */
+@media (max-width: 767px) {
+    .hero-books .book-item {
+        flex: 0 0 150px;
+    }
+}
+
+/* Find and replace this rule */
+.hero-books .book-item img {
+    width: 100%;
+    aspect-ratio: 2 / 3; /* This ensures correct book cover proportions */
+    object-fit: cover; /* CHANGED: from contain */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-books .book-item.active img {
+    transform: scale(1.15);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+.hero-books .book-item.side img {
+    transform: scale(0.85);
+    opacity: 0.7;
+}
+
+/* --- THIS IS THE CRITICAL RESPONSIVE PART THAT WAS MISSING --- */
+@media (max-width: 1200px) {
+    .hero-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem; /* This reduces the large gap on smaller screens */
+    }
+}
+
+
+@media (max-width: 768px) {
+    .hero-text h1 {
+        font-size: 4rem;
+    }
+
+    .hero-text h1::before {
+        -webkit-text-stroke: 0.05em #88b988;
+        transform: translate(0.1em, 0.1em);
+    }
+    
+    .hero-text p {
+        font-size: 1.1rem;
+    }
+}
+
+.search-section {
+    text-align: center;
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+}
+@media (min-width: 768px) {
+    .search-section {
+        margin-top: 9rem;
+        margin-bottom: 5rem;
+    }
+}
+
+.recommendation-header {
+    width: 100%;
+    position: relative;
+    left: 50%;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 4rem;
+    transform: translateX(-50%);
+    padding: 1.5rem 0;
+}
+.recommendation-header h2 {
+    font-size: 2.25rem; 
+    line-height: 2.5rem;
+}
+@media (min-width: 768px) {
+    .recommendation-header h2 {
+        font-size: 3.75rem; 
+        line-height: 1;
+    }
+}
+
+.cta-section {
+    text-align: center;
+    margin-top: 6rem;
+    margin-bottom: 4rem;
+}
+@media (min-width: 768px) {
+    .cta-section {
+        margin-top: 9rem;
+        margin-bottom: 5rem;
+    }
+}
+.cta-button {
+    background-color: #DFCFB8;
+    border: none;
+    border-radius: 20px;
+    padding: 1rem 4rem;
+    font-family: var(--font-playfair-display), serif;
+    font-size: 4rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    color: #504646;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    text-decoration: none; /* Add this to remove underline from the Link */
+    display: inline-block; /* Add this for proper spacing and sizing */
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cta-text {
+    max-width: 60rem;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    line-height: 1.5;
+}
+
+/* --- Responsive styles for CTA on Mobile --- */
+@media (max-width: 768px) {
+    .cta-button {
+        font-size: 1.8rem;
+        padding: 1rem 2rem;
+        min-width: auto;
+        width: 90%;
+    }
+
+    .cta-text {
+        font-size: 1.1rem;
+    }
+}
+
+/* --- Mobile Navigation Link Styles --- */
+.mobile-nav-link,
+.mobile-nav-link-highlight {
+    font-family: serif;
+    font-size: 2.25rem;
+    text-align: left;
+    padding: 1rem 2rem;
+    border-bottom: 2px solid rgba(23, 63, 37, 0.1);
+    text-decoration: none;
+    color: #173F25;
+    transition: background-color 0.2s, color 0.2s;
+}
+.mobile-nav-link:hover {
+    background-color: rgba(23, 63, 37, 0.05);
+}
+.mobile-nav-link-highlight {
+    background-color: #173F25;
+    color: #FCF9F6;
+    border-bottom: 2px solid #173F25;
+}
+.mobile-nav-link-highlight:hover {
+    opacity: 0.9;
+}
+.mobile-nav-link-highlight:last-child, .mobile-nav-link:last-child {
+    border-bottom: 0;
+}
+
+.home-bookshelf-section .bookshelf-container {
+    max-width: 1540px;
+}
+
+/* --- 3D BOOK STYLES --- */
+
+.bookshelf-section .bookshelf-container {
+    perspective: 1500px;
+}
+
+.book-wrapper-3d {
+    width: 10rem;
+    height: 15rem;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateY(-25deg);
+    transition: transform 0.5s ease;
+    margin: 0 auto 1rem;
+}
+
+.book-item:hover .book-wrapper-3d {
+    transform: rotateY(0deg) scale(1.05);
+}
+
+.book-cover-3d {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-origin: left;
+    transform: translateZ(1.25rem);
+    border-radius: 0 5px 5px 0;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+.book-cover-3d img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.book-spine-3d {
+    position: absolute;
+    width: 2.5rem;
+    height: 100%;
+    left: 0;
+    background: #444;
+    transform-origin: center;
+    transform: rotateY(-90deg) translateZ(1.25rem);
+    box-shadow: inset 2px 0 5px rgba(0, 0, 0, 0.2);
+    color: white;
+    font-size: 0.7rem;
+    padding: 1rem 0;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* --- Tab System for Bookshelf Page --- */
+.genre-toggle-container {
+    margin-bottom: 1.5rem;
+}
+
+.genre-toggle-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: #fff;
+    border: 1px solid #d1d5db; /* gray-300 */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.genre-toggle-button:hover {
+    border-color: #173F25;
+}
+
+.genre-toggle-button.active {
+    background-color: #173F25;
+    color: #ffffff;
+    border-color: #173F25;
+}
+
+.toggle-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.genre-tags-container {
+    transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, margin-bottom 0.4s ease-in-out;
+}
+
+.genre-tag {
+    transition: all 0.2s ease-in-out;
+}
+
+/* --- Final Embla Bookshelf Styles (Supports Buttons & Swipe) --- */
+.bookshelf-section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+.bookshelf-controls-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.scroll-btn {
+    background-color: rgba(31, 41, 55, 0.8);
+    color: #fff;
+    border: none;
+    border-radius: 9999px;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    box-shadow: 0 1px 3px rgba(31,41,55,0.2);
+    z-index: 10;
+    flex-shrink: 0;
+}
+.scroll-btn:hover {
+    background-color: #1f2937;
+}
+
+/* Embla Carousel Styles */
+.embla {
+    overflow: hidden;
+    perspective: 1500px; 
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+.embla__container {
+    display: flex;
+    padding: 1rem 0; 
+}
+.embla__slide {
+    flex: 0 0 12rem; /* Each slide takes up 12rem of width */
+    min-width: 0;
+    padding: 0 1rem; /* Space between books */
+    position: relative;
+}
+
+/* --- Book Item and Info Styles --- */
+.book-item {
+    display: flex;
+    flex-direction: column;
+    width: 10rem;
+    flex-shrink: 0;
+}
+.book-info {
+    text-align: center;
+    padding-top: 0.5rem;
+}
+.book-info h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #504646;
+    margin: 0;
+    line-height: 1.25;
+}
+.book-info p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    color: #6B7280;
+    margin-top: 0.25rem;
+}
+
+/* --- Home Prompt Button Styles --- */
+.search-option-btn {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #d1d5db;
+    color: #173F25;
+    background-color: transparent;
+}
+.search-option-btn.active {
+    background-color: #173F25;
+    color: #fff;
+    border-color: #173F25;
+}
+.search-option-btn:not(.active):hover {
+    border-color: #173F25;
+}
+
+/* --- Textarea Customizations --- */
+.search-input {
+    resize: none; /* This removes the ugly resize handle */
+}
+
+/* --- Footer Styles --- */
+.site-footer {
+    background-color: #173F25;
+    color: white;
+    padding: 1.5rem 1rem;
+    font-family: var(--font-inter), sans-serif;
+    margin-top: auto; /* This is important, it pushes the footer to the bottom of the page */
+}
+
+.footer-content {
+    max-width: 1500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.footer-info {
+    font-size: 0.875rem;
+    color: #E5E7EB;
+}
+
+.footer-info .separator {
+    margin: 0 0.5rem;
+}
+
+/* --- Responsive Styles for Mobile Footer --- */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .footer-info {
+        text-align: center;
+    }
+}
+
+/* --- Bookshelf Page Header Layout --- */
+.bookshelf-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.bookshelf-title {
+    font-family: var(--font-playfair-display), serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #173F25;
+    margin-bottom: 0.5rem;
+}
+
+.bookshelf-subtitle {
+    font-size: 1.125rem;
+    color: #6B7280;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .bookshelf-title {
+        font-size: 3rem;
+    }
+}
+
+/* --- Bookshelf Page Filter Styles --- */
+.genre-toggle-container {
+    margin-bottom: 1.5rem;
+}
+
+.genre-toggle-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: #fff;
+    border: 1px solid #d1d5db;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    color: #173F25; /* Icon color */
+}
+
+.genre-toggle-button:hover {
+    border-color: #173F25;
+}
+
+.genre-toggle-button.active {
+    background-color: #173F25;
+    color: #ffffff; /* Icon color when active */
+    border-color: #173F25;
+}
+
+.toggle-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* --- Genre Tag Cloud with Dropdown Animation --- */
+.genre-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(-10px);
+    transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, margin-bottom 0.4s ease-in-out;
+}
+
+.genre-tags-container.visible {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+    margin-bottom: 3rem;
+}
+
+.genre-tag {
+    padding: 8px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 9999px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #173F25;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+}
+
+.genre-tag:hover {
+    border-color: #173F25;
+    background-color: rgba(23, 63, 37, 0.05);
+}
+
+.genre-tag.active {
+    background-color: #173F25;
+    color: #ffffff;
+    border-color: #173F25;
+}
+
+/* --- Policy Page Layout (for Privacy & Terms) --- */
+.policy-content section {
+    padding-bottom: 2rem;
+}
+
+.policy-content h2 {
+    font-size: 1.875rem; /* 30px */
+    line-height: 2.25rem; /* 36px */
+    color: #173F25;
+    border-bottom-width: 1px;
+    padding-bottom: 0.5rem; /* 8px */
+    margin-bottom: 1rem; /* 16px */
+}
+
+.policy-content p, .policy-content ol, .policy-content ul {
+    color: #374151; /* gray-700 */
+    line-height: 1.75;
+}
+
+.policy-content a {
+    color: #173F25;
+    font-weight: 600;
+}
+
+.policy-content a:hover {
+    text-decoration: underline;
+}
+
+/* --- Animations for Why Us Page --- */
+@keyframes pulse-subtle {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+.icon-pulse {
+    animation: pulse-subtle 3s ease-in-out infinite;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Simple Cover Slide Book Animation --- */
+.new-book-container {
+    position: relative;
+    width: 250px;
+    height: 320px;
+    background-color: #FDF9F6;
+    border: 1px solid #173F25;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.new-book-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #173F25, #2a5d3f);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.7s ease;
+    cursor: pointer;
+}
+
+.new-book-container:hover .new-book-cover,
+.group:hover .new-book-cover {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+/* --- Loading Book Animation for Prompt Page --- */
+.book-container {
+    perspective: 1500px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.book {
+    width: 150px;
+    height: 100px;
+    position: relative;
+    transform-style: preserve-3d;
+    margin: 0 auto 1.5rem;
+    transform: rotateX(40deg);
+    /* The border is removed from here to prevent alignment issues */
+}
+
+/* Static left page of the book */
+.book::before {
+    content: '';
+    display: block;
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #FDF9F6;
+    border-right: 1px solid #e0dccc;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+/* This new pseudo-element creates the green outline BEHIND the book */
+.book::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background-color: #173F25;
+    border-radius: 6px;
+    z-index: -1;
+    transform: translateZ(-5px); /* Push it further back */
+    display: block; /* Ensure it's rendered */
+}
+
+.book__page {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform-origin: left center;
+    background-color: #FDF9F6;
+    border-radius: 0 3px 3px 0;
+    display: block;
+    border: 1px solid #e0dccc;
+}
+
+.book__page:nth-child(1) {
+    animation: seamless-flip 2.0s ease-in-out infinite;
+    animation-delay: 0s;
+}
+.book__page:nth-child(2) {
+    animation: seamless-flip 2.0s ease-in-out infinite;
+    animation-delay: 0.5s;
+}
+.book__page:nth-child(3) {
+    animation: seamless-flip 2.0s ease-in-out infinite;
+    animation-delay: 1.0s;
+}
+.book__page:nth-child(4) {
+    animation: seamless-flip 2.0s ease-in-out infinite;
+    animation-delay: 1.5s;
+}
+.book__page:nth-child(5) {
+    transform: translateX(2px);
+    z-index: -1;
+}
+
+/* Corrected keyframe with fade-in and smooth fade-out */
+@keyframes seamless-flip {
+  0% {
+    transform: rotateY(0deg);
+    opacity: 0;
+  }
+  /* Slower fade-in */
+  10% {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+  /* The flip itself */
+  40% {
+    transform: rotateY(-180deg);
+    opacity: 1;
+  }
+  /* Hold, then start a slower fade-out */
+  70% {
+    transform: rotateY(-180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: rotateY(-180deg);
+    opacity: 0;
+  }
+}
+/* --- Policy Page Layout (for Privacy & Terms) --- */
+.policy-sidebar nav a.active {
+    color: #173F25;
+    font-weight: bold;
+    background-color: rgba(23, 63, 37, 0.05);
+    border-left: 3px solid #173F25;
+}
+
+.policy-content section {
+    padding-bottom: 2rem;
+}
+
+.policy-content h2 {
+    font-size: 1.875rem; /* 30px */
+    line-height: 2.25rem; /* 36px */
+    color: #173F25;
+    border-bottom-width: 1px;
+    padding-bottom: 0.5rem; /* 8px */
+    margin-bottom: 1rem; /* 16px */
+}
+
+.policy-content p, .policy-content ol, .policy-content ul {
+    color: #374151; /* gray-700 */
+    line-height: 1.75;
+}
+
+.policy-content a {
+    color: #173F25;
+    font-weight: 600;
+}
+
+.policy-content a:hover {
+    text-decoration: underline;
+}
+
+/* --- Add margin to policy pages to ensure scrolling --- */
+.policy-content section:last-of-type {
+    margin-bottom: 35vh; /* vh stands for viewport height */
+}
+
+/* --- Book Details Page --- */
+.book-details-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 0.75rem; /* 12px */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+    align-items: start;
+}
+
+.book-cover-container img {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.book-title {
+    font-size: 2.25rem; /* text-4xl */
+}
+
+.book-author {
+    font-size: 1.25rem; /* text-xl */
+}
+
+.synopsis-title {
+    font-size: 1.5rem; /* text-2xl */
+}
+
+.book-synopsis {
+    line-height: 1.8;
+}
+
+/* Responsive styles for larger screens */
+@media (min-width: 768px) {
+    .book-details-layout {
+        grid-template-columns: 1fr 2fr;
+        gap: 3rem;
+        padding: 3rem;
+    }
+
+    .book-cover-container {
+        position: sticky;
+        top: 7rem; /* Adjust based on your navbar height */
+    }
+
+    .book-cover-container img {
+        margin: 0; /* Reset margin for desktop layout */
+    }
+
+    .book-title {
+        font-size: 2.75rem;
+    }
+
+    .book-author {
+        font-size: 1.25rem;
+    }
+}
+
+/* --- Prompt Page UI Styles --- */
+.responsive-quote-text {
+    /* Clamps font size between a min, a desired value, and a max */
+    font-size: clamp(1rem, 2.5vw, 1.6rem);
+}
+
+.responsive-header-text {
+    font-size: clamp(1.875rem, 5vw, 3rem);
+}
+
+.search-input::-webkit-scrollbar {
+    width: 4px;
+}
+.search-input::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.search-input::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 2px;
+}
+
+/* --- Prompt Page Specific Styles (Matching Original Design) --- */
+
+/* Ensures the prompt page takes full available height and centers content */
+.flex-grow.flex.flex-col.items-center.justify-center.min-h-\[calc\(100vh-80px\)\] {
+    background-color: #FDF9F6; /* Ensure the background is the exact light cream */
+    padding-top: 5rem; /* More top padding to align content */
+    padding-bottom: 5rem; /* More bottom padding */
+    min-height: calc(100vh - 80px); /* Adjust based on navbar height, if necessary */
+}
+
+/* Quote Text Styling */
+.prompt-page .responsive-quote-text {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    color: #173F25;
+}
+
+/* Header Text Styling */
+.prompt-page .responsive-header-text {
+    font-family: var(--font-playfair-display);
+    font-size: 3rem; /* 48px */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #173F25;
+}
+
+/* Search Box Container */
+.search-box-container {
+    background-color: #ffffff;
+    border: 1px solid #c7d2d3; /* Lighter border for a softer look */
+    border-radius: 1rem; /* 16px - More rounded corners */
+    padding: 1rem 1.5rem; /* Adjusted padding */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Softer shadow */
+    transition: all 0.2s ease-in-out;
+}
+
+.search-box-container:focus-within {
+    border-color: #173F25; /* Darker green border on focus */
+    box-shadow: 0 4px 20px rgba(23, 63, 37, 0.15); /* More prominent shadow on focus */
+}
+
+/* Search Input (Textarea) */
+.search-input {
+    min-height: 24px; /* Ensure a minimum height for one line */
+    padding-bottom: 1rem; /* Padding below text for button row */
+    font-family: var(--font-inter);
+    font-weight: 400;
+    color: #173F25;
+    /* Placeholder color adjustment */
+    &::placeholder {
+        color: #6b7280; /* Neutral-500 */
+        opacity: 1; /* Firefox default opacity */
+    }
+}
+
+/* Search Options Row (buttons and send button) */
+.search-options-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Search Option Buttons (By Highlights, By Synopsis) */
+.search-option-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 9999px; /* Full pill shape */
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    border: 1px solid transparent; /* Default transparent border */
+    color: #173F25; /* Text color for inactive state */
+    background-color: #f3f4f6; /* Light gray background for inactive */
+}
+
+.search-option-btn:hover:not(.active) {
+    background-color: #e5e7eb; /* Slightly darker gray on hover */
+}
+
+.search-option-btn.active {
+    background-color: #173F25; /* Classic green for active state */
+    color: #ffffff; /* White text for active state */
+    border-color: #173F25; /* Green border for active state */
+}
+
+/* Send Button */
+.send-btn {
+    background-color: #173F25; /* Green background */
+    color: #ffffff; /* White icon */
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(23, 63, 37, 0.2); /* Soft shadow */
+    /* ADDED background-color to the transition */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.send-btn:hover:enabled {
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: 0 4px 15px rgba(23, 63, 37, 0.3); /* Enhanced shadow on hover */
+    opacity: 0.9; /* ADDED: This makes the button slightly fade on hover */
+}
+
+.send-btn:disabled {
+    background-color: #e5e7eb; /* Lighter gray for disabled */
+    color: #a1a1aa; /* Darker gray for disabled icon */
+    cursor: not-allowed;
+    box-shadow: none;
+}
+/* --- Bookshelf & 3D Book Styles (Final Version) --- */
+
+.bookshelf {
+    display: flex;
+    width: max-content;
+    gap: 2rem;
+    /* THIS IS THE FIX: Adds a 1rem buffer above and below the books */
+    padding: 1rem 0;
+}
+
+.book-item {
+    perspective: 1500px;
+}
+
+.book-wrapper-3d {
+    width: 10rem;
+    height: 15rem;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    margin: 0 auto 1rem;
+}
+
+.book-item:hover .book-wrapper-3d {
+    transform: rotateY(35deg) scale(1.05);
+}
+
+.book-cover-3d {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-origin: left;
+    transform: translateZ(1.25rem);
+    border-radius: 0 5px 5px 0;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    overflow: hidden;
+    z-index: 10;
+}
+
+.book-cover-3d img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.book-spine-3d {
+    position: absolute;
+    width: 2.5rem;
+    height: 100%;
+    left: 0;
+    background-color: #333;
+    background-image: linear-gradient(to right, rgba(0,0,0,0.2) 0%, rgba(255,255,255,0.1) 10%, rgba(0,0,0,0.2) 100%);
+    transform-origin: center;
+    transform: rotateY(-90deg) translateZ(1.25rem);
+    color: white;
+    font-size: 0.75rem;
+    padding: 1.5rem 0.25rem;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.book-spine-3d p {
+    font-size: 0.65rem;
+    opacity: 0.8;
+    margin-top: 0.5rem;
+}
+
+/* --- Screen Orientation Lock --- */
+.orientation-lock-overlay {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #FCF9F6; /* Match your site's background */
+  z-index: 9999; /* Ensure it's on top of everything */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem;
+  color: #173F25; /* Match your site's text color */
+}
+
+/* This media query activates the lock on landscape mobile screens */
+@media (orientation: landscape) and (max-height: 500px) {
+  .orientation-lock-overlay {
+    display: flex; /* Show the message */
+  }
+
+  /* Hide the rest of the site */
+  nav, main, .site-footer {
+    display: none;
+  }
+}
+
+/* --- Custom Page Turn Animation --- */
+@keyframes page-turn {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.page-content-animate {
+  animation: page-turn 0.6s ease-in-out forwards;
+}
+/* --- Custom Green Scrollbar Styles --- */
+/* This styles the overall scrollbar, setting its width */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* This styles the "track" or the background of the scrollbar */
+::-webkit-scrollbar-track {
+  background: #FCF9F6; /* Matches your site's cream background */
+  border-left: 1px solid #e5e7eb; /* A subtle light gray border */
+}
+ 
+/* This styles the draggable "thumb" of the scrollbar */
+::-webkit-scrollbar-thumb {
+  background-color: #173F25; /* Your website's main green color */
+  border-radius: 10px;
+  border: 3px solid #FCF9F6; /* Creates a nice padding effect */
+}
+
+/* This adds a hover effect to the thumb */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #2a5d3f; /* A slightly lighter green for interaction */
+}
+/* --- High-Precision Underline Effect --- */
+.highlight-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #173F25;
+  transform: scaleX(0);
+  transform-origin: var(--mouse-x, center);
+  transition: transform 0.3s ease-out;
+}
+
+/* Animate the underline when the parent .highlight-group is hovered */
+.highlight-group:hover .highlight-underline::after {
+  transform: scaleX(1);
+}
+
+/* --- Custom Font Class --- */
+.font-lustria {
+    font-family: var(--font-lustria), serif;
+}
+.page-gradient-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+    pointer-events: none;
+    border-radius: 0 0.375rem 0.375rem 0;
+    background: 
+        linear-gradient(to right, rgba(23, 63, 37, 0.4) 0%, rgba(23, 63, 37, 0) 80%) top / 100% 2px no-repeat,
+        linear-gradient(to right, rgba(23, 63, 37, 0.4) 0%, rgba(23, 63, 37, 0) 80%) bottom / 100% 2px no-repeat,
+        linear-gradient(to right, hsl(0 0% 100% / 0.95) 5%, hsl(0 0% 100% / 0) 70%);
+}
+
+/* For the back of the page (visible on the left after flipping) */
+.flipped-page-gradient-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: 0.375rem 0 0 0.375rem; /* Rounded left corners */
+    z-index: 5; /* Sit below the quote text */
+    background: 
+        linear-gradient(to left, rgba(23, 63, 37, 0.4) 0%, rgba(23, 63, 37, 0) 80%) top / 100% 2px no-repeat,
+        linear-gradient(to left, rgba(23, 63, 37, 0.4) 0%, rgba(23, 63, 37, 0) 80%) bottom / 100% 2px no-repeat,
+        linear-gradient(to left, hsl(0 0% 100% / 0.95) 5%, hsl(0 0% 100% / 0) 70%); /* Reversed direction */
+}
+.book-cover-hardcover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+    
+    /* This gradient will now ONLY apply to the book cover */
+    background: linear-gradient(to right, rgba(252, 249, 246, 0) 50%, rgba(252, 249, 246, 0.99) 79%);
+}
+@keyframes fallback-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.9; }
+}
+
+.motion-fallback-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', Courier, monospace;
+  animation: fallback-pulse 0.1s infinite;
+  backdrop-filter: blur(2px);
+  cursor: pointer;
+}
+
+.mfo-content {
+  text-align: center;
+  color: #00ff00;
+  text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+  pointer-events: none;
+}
+
+.mfo-header {
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: 0.2rem;
+  animation: jitter 1.5s infinite;
+}
+
+.mfo-text {
+  margin-top: 0.5rem;
+  color: rgba(0, 255, 0, 0.7);
+}
+
+.mfo-button {
+  margin-top: 2rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #00ff00;
+  background: transparent;
+  color: #00ff00;
+  pointer-events: auto;
+}
+.mfo-button:hover {
+  background: #00ff00;
+  color: #000;
+  box-shadow: 0 0 15px #00ff00;
+}
+
+@keyframes jitter {
+  0% { transform: translate(0); }
+  20% { transform: translate(-3px, 3px); }
+  40% { transform: translate(3px, -3px); }
+  60% { transform: translate(-3px, -3px); }
+  80% { transform: translate(3px, 3px); }
+  100% { transform: translate(0); }
+}
+.mfo-secondary-view {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(10, 10, 15, 0.98);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', Courier, monospace;
+  cursor: pointer;
+  animation: fallback-pulse 0.2s infinite alternate;
+}
+
+.mfo-secondary-content {
+  color: #a0a0a0;
+  text-align: center;
+}
+
+.mfo-secondary-header {
+  font-size: 1rem;
+  color: #444;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.mfo-secondary-entry {
+  border: 1px solid #333;
+  padding: 1rem 2rem;
+}
+
+.mfo-entry-name {
+  font-size: 1.2rem;
+  color: #ddd;
+  letter-spacing: 0.1rem;
+}
+
+.mfo-entry-role {
+  font-size: 0.8rem;
+  color: #555;
+  margin-top: 0.25rem;
+}
+.content-section-title {
+    font-size: 1.875rem; /* text-3xl */
+    font-family: var(--font-playfair-display), serif;
+    color: #173F25;
+    margin-bottom: 1.5rem;
+}
+
+.highlight-card {
+    position: relative;
+    background-color: #FFFDFA; /* A slightly warmer, paper-like white */
+    border-radius: 4px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.highlight-card:hover {
+    transform: rotate(-1.5deg) scale(1.03);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.highlight-quote-icon {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    font-size: 3.5rem;
+    color: #173F25; 
+    font-family: var(--font-playfair-display), serif;
+    line-height: 1;
+    z-index: 0;
+}
+.highlight-card::after {
+    content: '”';
+    position: absolute;
+    bottom: -0.5rem;
+    right: 0.75rem;
+    font-size: 3.5rem;
+    color: #173F25;
+    font-family: var(--font-playfair-display), serif;
+    line-height: 1;
+    z-index: 0;
+}
+
+.highlight-text {
+    position: relative; /* Ensures text stays on top of the icon */
+    z-index: 1;
+    font-style: italic;
+    color: #374151; /* gray-700 */
+    font-size: 1.125rem; /* text-lg */
+    /* UPDATED: Added right padding to match the left */
+    padding-left: 2.5rem; 
+    padding-right: 2.5rem;
+}
+/* --- Book Details Page Container (The Box) --- */
+.book-details-container {
+    background-color: #FFFFFF;
+    border-radius: 0.75rem; /* 12px */
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+@media (min-width: 768px) {
+    .book-details-container {
+        padding: 3rem;
+    }
+}
+
+/* --- Book Details Page (Final Styles) --- */
+
+/* The wrapper holds the shadow and overall shape */
+.book-details-wrapper {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 0.75rem; /* 12px */
+}
+
+/* The top box for the cover and title */
+.book-hero-section {
+    background-color: #FFFFFF;
+    padding: 2.5rem;
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+}
+
+/* The bottom box for the content */
+.book-content-box {
+    background-color: #FFFFFF;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 1.5rem; /* 24px */
+}
+
+@media (min-width: 768px) {
+    .book-hero-section,
+    .book-content-box {
+        padding: 3.5rem;
+    }
+}
+
+/* --- Final Genre Display Style --- */
+.genre-display-text {
+    border-left: 3px solid #d4c0a1; /* The vertical line */
+    padding-left: 1rem;
+    font-size: 1.2rem;
+    color: #504646;
+}
+
+/* --- Highlight Card Styles --- */
+.content-section-title {
+    font-size: 1.875rem; /* text-3xl */
+    font-family: var(--font-playfair-display), serif;
+    color: #173F25;
+    margin-bottom: 1.5rem;
+}
+
+.highlight-card {
+    position: relative;
+    background-color: #FFFDFA;
+    border-radius: 4px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.highlight-card:hover {
+    transform: rotate(-1.5deg) scale(1.03);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.highlight-quote-icon {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    font-size: 3.5rem;
+    color: #173F25; 
+    font-family: var(--font-playfair-display), serif;
+    line-height: 1;
+    z-index: 0;
+}
+
+.highlight-card::after {
+    content: '”';
+    position: absolute;
+    bottom: -0.5rem;
+    right: 0.75rem;
+    font-size: 3.5rem;
+    color: #173F25;
+    font-family: var(--font-playfair-display), serif;
+    line-height: 1;
+    z-index: 0;
+}
+
+.highlight-text {
+    position: relative;
+    z-index: 1;
+    font-style: italic;
+    color: #374151;
+    font-size: 1.125rem;
+    padding-left: 2.5rem; 
+    padding-right: 2.5rem;
+}
+/* --- Bookshelf Fade Effect --- */
+
+/* This makes the wrapper a positioning context for the gradients */
+.bookshelf-controls-wrapper {
+    position: relative;
+}
+
+/* This creates the fade on the left side */
+.bookshelf-controls-wrapper::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5rem; /* 80px */
+    background: linear-gradient(to right, #FCF9F6, transparent);
+    pointer-events: none; /* Allows clicking through the gradient */
+    z-index: 5; /* Sits on top of books but below buttons */
+}
+
+/* This creates the fade on the right side */
+.bookshelf-controls-wrapper::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 5rem; /* 80px */
+    background: linear-gradient(to left, #FCF9F6, transparent);
+    pointer-events: none;
+    z-index: 5;
+}
