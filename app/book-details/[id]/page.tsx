@@ -65,43 +65,54 @@ export default async function BookDetailsPage({
   // Set the genre (hardcoded)
   const primaryGenre = "Self-improvement";
 
+  // --- STYLE VARIABLES ---
+  const imageContainerClasses = "w-full max-w-2xs lg:col-span-1 lg:max-w-none lg:mx-0 sticky top-28 h-fit lg:flex lg:justify-start";
+  const imageClasses = "w-full h-auto rounded-lg shadow-2xl object-cover";
+
+  const titleClasses = "text-xl md:text-2xl lg:text-5xl font-bold font-serif mb-2 text-classic-green";
+  const authorClasses = "text-sm md:text-base lg:text-2xl italic text-gray-600 mb-6";
+  const synopsisClasses = "text-sm lg:text-base leading-relaxed text-gray-700";
+  const highlightClasses = "highlight-text text-sm lg:text-base";
+  // --- END STYLE VARIABLES ---
+
+
   return (
     <div className="bg-[#FCF9F6] py-8 min-h-screen">
-      <div className="container max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 items-start">
+      <div className="container max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-start">
 
-        {/* --- STICKY IMAGE WRAPPER (Direct Grid Child) --- */}
-        {/*
-          CHANGE 1: Added 'md:flex' and 'md:justify-center'
-          This makes the column a flex container and centers its child.
-        */}
-        <div className="md:col-span-1 sticky top-28 h-fit md:flex md:justify-start md:-ml-[1.2rem]">
+        {/* --- STICKY IMAGE WRAPPER --- */}
+        <div className={imageContainerClasses}>
           <Image
             src={bookData.image || "/image/placeholder.png"}
             alt={`Cover of ${bookData.title}`}
             width={350}
             height={525}
-            className="h-auto rounded-lg shadow-2xl object-cover" 
+            className={imageClasses} 
             priority
             quality={100}
-            sizes="(max-width: 768px) 100vw, 33vw"
+            sizes="(max-width: 1024px) 100vw, 33vw"
           />
         </div>
 
-        {/* --- CONTENT SECTION (Direct Grid Child) --- */}
-        <div className="md:col-span-2 min-h-screen relative
-                        md:before:content-[''] md:before:absolute md:before:inset-y-0
-                        md:before:w-[0.5rem] md:before:bg-[#D4C0A1]
-                        md:before:left-[-1rem] lg:before:left-[-1.5rem]
-                        md:before:translate-x-[-50%]">
+        {/* --- CONTENT SECTION --- */}
+        {/*
+          CHANGE IS HERE: I have removed 'min-h-screen' from this div.
+          Its height will now be based on its content, fixing your gap issue.
+        */}
+        <div className="lg:col-span-2 relative
+                        lg:before:content-[''] lg:before:absolute lg:before:inset-y-0
+                        lg:before:w-[0.5rem] lg:before:bg-[#D4C0A1]
+                        lg:before:left-[-1rem] lg:before:left-[-1.5rem]
+                        lg:before:translate-x-[-50%]">
 
           {/* Container for book content using custom styles */}
           <div className="book-content-box">
             {/* Title, Author, Genre */}
-            <section aria-labelledby="book-title-author-genre" className="book-hero-info mb-8 text-center md:text-left">
-              <h1 id="book-title-author-genre" className="text-4xl md:text-5xl font-bold font-serif mb-2 text-classic-green">
+            <section aria-labelledby="book-title-author-genre" className="book-hero-info mb-8 text-center lg:text-left">
+              <h1 id="book-title-author-genre" className={titleClasses}>
                 {bookData.title}
               </h1>
-              <h2 className="text-xl md:text-2xl italic text-gray-600 mb-6">
+              <h2 className={authorClasses}>
                 by {bookData.author || "Unknown Author"}
               </h2>
               {primaryGenre && (
@@ -114,7 +125,7 @@ export default async function BookDetailsPage({
             {/* Synopsis */}
             <section aria-labelledby="synopsis-heading" className="mb-12">
               <h3 id="synopsis-heading" className="content-section-title">Synopsis</h3>
-              <p className="text-lg leading-relaxed text-gray-700">
+              <p className={synopsisClasses}>
                 {bookData.synopsis || "Synopsis not available."}
               </p>
             </section>
@@ -127,7 +138,7 @@ export default async function BookDetailsPage({
                   {parsedHighlights.map((highlight, index) => (
                     <div key={index} className="highlight-card">
                       <span className="highlight-quote-icon">“</span>
-                      <p className="highlight-text">{highlight}</p>
+                      <p className={highlightClasses}>{highlight}</p>
                     </div>
                   ))}
                 </div>

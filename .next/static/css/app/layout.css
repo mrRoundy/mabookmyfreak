@@ -2763,65 +2763,6 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 35vh; /* vh stands for viewport height */
 }
 
-/* --- Book Details Page --- */
-.book-details-layout {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    background-color: #fff;
-    padding: 1.5rem;
-    border-radius: 0.75rem; /* 12px */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
-    align-items: start;
-}
-
-.book-cover-container img {
-    max-width: 300px;
-    margin: 0 auto;
-}
-
-.book-title {
-    font-size: 2.25rem; /* text-4xl */
-}
-
-.book-author {
-    font-size: 1.25rem; /* text-xl */
-}
-
-.synopsis-title {
-    font-size: 1.5rem; /* text-2xl */
-}
-
-.book-synopsis {
-    line-height: 1.8;
-}
-
-/* Responsive styles for larger screens */
-@media (min-width: 768px) {
-    .book-details-layout {
-        grid-template-columns: 1fr 2fr;
-        gap: 3rem;
-        padding: 3rem;
-    }
-
-    .book-cover-container {
-        position: sticky;
-        top: 7rem; /* Adjust based on your navbar height */
-    }
-
-    .book-cover-container img {
-        margin: 0; /* Reset margin for desktop layout */
-    }
-
-    .book-title {
-        font-size: 2.75rem;
-    }
-
-    .book-author {
-        font-size: 1.25rem;
-    }
-}
-
 /* --- Prompt Page UI Styles --- */
 .responsive-quote-text {
     /* Clamps font size between a min, a desired value, and a max */
@@ -3548,28 +3489,12 @@ h1, h2, h3, h4, h5, h6 {
     right: 4rem;
   }
 
-  .md\:col-span-1 {
-    grid-column: span 1 / span 1;
-  }
-
-  .md\:col-span-2 {
-    grid-column: span 2 / span 2;
-  }
-
-  .md\:-ml-\[1\.2rem\] {
-    margin-left: -1.2rem;
-  }
-
   .md\:-mr-8 {
     margin-right: -2rem;
   }
 
   .md\:block {
     display: block;
-  }
-
-  .md\:flex {
-    display: flex;
   }
 
   .md\:hidden {
@@ -3590,14 +3515,6 @@ h1, h2, h3, h4, h5, h6 {
 
   .md\:grid-cols-\[220px_1fr\] {
     grid-template-columns: 220px 1fr;
-  }
-
-  .md\:justify-start {
-    justify-content: flex-start;
-  }
-
-  .md\:justify-center {
-    justify-content: center;
   }
 
   .md\:whitespace-nowrap {
@@ -3629,10 +3546,6 @@ h1, h2, h3, h4, h5, h6 {
   .md\:px-16 {
     padding-left: 4rem;
     padding-right: 4rem;
-  }
-
-  .md\:text-left {
-    text-align: left;
   }
 
   .md\:text-2xl {
@@ -3667,50 +3580,30 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 42.6px;
   }
 
+  .md\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
   .md\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
   }
-
-  .md\:before\:absolute::before {
-    content: var(--tw-content);
-    position: absolute;
-  }
-
-  .md\:before\:inset-y-0::before {
-    content: var(--tw-content);
-    top: 0px;
-    bottom: 0px;
-  }
-
-  .md\:before\:left-\[-1rem\]::before {
-    content: var(--tw-content);
-    left: -1rem;
-  }
-
-  .md\:before\:w-\[0\.5rem\]::before {
-    content: var(--tw-content);
-    width: 0.5rem;
-  }
-
-  .md\:before\:translate-x-\[-50\%\]::before {
-    content: var(--tw-content);
-    --tw-translate-x: -50%;
-    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  }
-
-  .md\:before\:bg-\[\#D4C0A1\]::before {
-    content: var(--tw-content);
-    --tw-bg-opacity: 1;
-    background-color: rgb(212 192 161 / var(--tw-bg-opacity, 1));
-  }
-
-  .md\:before\:content-\[\'\'\]::before {
-    --tw-content: '';
-    content: var(--tw-content);
-  }
 }
 @media (min-width: 1024px) {
+
+  .lg\:col-span-1 {
+    grid-column: span 1 / span 1;
+  }
+
+  .lg\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+
+  .lg\:mx-0 {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
 
   .lg\:flex {
     display: flex;
@@ -3736,8 +3629,20 @@ h1, h2, h3, h4, h5, h6 {
     width: 1.5rem;
   }
 
+  .lg\:max-w-none {
+    max-width: none;
+  }
+
   .lg\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:justify-start {
+    justify-content: flex-start;
   }
 
   .lg\:gap-12 {
@@ -3749,9 +3654,66 @@ h1, h2, h3, h4, h5, h6 {
     padding-right: 2rem;
   }
 
+  .lg\:text-left {
+    text-align: left;
+  }
+
+  .lg\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .lg\:text-5xl {
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .lg\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .lg\:before\:absolute::before {
+    content: var(--tw-content);
+    position: absolute;
+  }
+
+  .lg\:before\:inset-y-0::before {
+    content: var(--tw-content);
+    top: 0px;
+    bottom: 0px;
+  }
+
   .lg\:before\:left-\[-1\.5rem\]::before {
     content: var(--tw-content);
     left: -1.5rem;
+  }
+
+  .lg\:before\:left-\[-1rem\]::before {
+    content: var(--tw-content);
+    left: -1rem;
+  }
+
+  .lg\:before\:w-\[0\.5rem\]::before {
+    content: var(--tw-content);
+    width: 0.5rem;
+  }
+
+  .lg\:before\:translate-x-\[-50\%\]::before {
+    content: var(--tw-content);
+    --tw-translate-x: -50%;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+
+  .lg\:before\:bg-\[\#D4C0A1\]::before {
+    content: var(--tw-content);
+    --tw-bg-opacity: 1;
+    background-color: rgb(212 192 161 / var(--tw-bg-opacity, 1));
+  }
+
+  .lg\:before\:content-\[\'\'\]::before {
+    --tw-content: '';
+    content: var(--tw-content);
   }
 }
 @media (min-width: 1280px) {

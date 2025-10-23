@@ -1,4 +1,4 @@
-// File: C:\Users\User\Documents\mabookmyass-main\app\book-details\[id]\page.tsx
+// File: C:\Users\User\Documents\mabookmyfreak-main\app\book-details\[id]\page.tsx
 import * as entry from '../../../../../app/book-details/[id]/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
