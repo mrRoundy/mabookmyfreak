@@ -415,11 +415,11 @@ function PromptComponent() {
   }, [recommendations]);
 
   return (
-    <main className="flex-grow flex flex-col items-center justify-center bg-classic-cream px-4 sm:px-6 lg:px-8 min-h-[calc(100vh-5rem)]">
+    <div className="flex-grow flex flex-col items-center justify-center bg-classic-cream px-4 sm:px-6 lg:px-8 min-h-[calc(100vh-5rem)] overflow-x-hidden overflow-y-hidden">
         <div className="w-full max-w-7xl mx-auto">
             <div className="text-center text-classic-green mb-10 max-w-2xl mx-auto">
                 <TypingAnimationPrompt />
-                <h2 className="font-serif text-3xl md:text-6xl font-bold uppercase tracking-wide whitespace-nowrap">
+                <h2 className="font-serif text-3xl md:text-6xl font-bold uppercase tracking-wide whitespace-nowFrap">
                     Begin by Asking...
                 </h2>
             </div>
@@ -449,33 +449,34 @@ function PromptComponent() {
                     </div>
                 </div>
             </form>
+        </div>
 
-            {isLoading && (
-                <div className="text-center text-classic-green text-lg my-5">
-                    <div className="book-container">
-                        <div className="book">
-                            <div className="book__page"></div>
-                            <div className="book__page"></div>
-                            <div className="book__page"></div>
-                            <div className="book__page"></div>
-                            <div className="book__page"></div>
-                            <div className="book__page"></div>
-                        </div>
+        {isLoading && (
+            <div className="text-center text-classic-green text-lg my-5">
+                <div className="book-container">
+                    <div className="book">
+                        <div className="book__page"></div>
+                        <div className="book__page"></div>
+                        <div className="book__page"></div>
+                        <div className="book__page"></div>
+                        <div className="book__page"></div>
+                        <div className="book__page"></div>
                     </div>
-                    <p>AI is analyzing your request and finding the best book recommendations...</p>
                 </div>
-            )}
+                <p>AI is analyzing your request and finding the best book recommendations...</p>
+            </div>
+        )}
 
-            {error && (
-                <div className="bg-classic-green bg-opacity-10 border border-classic-green text-classic-green p-4 rounded-lg my-5 text-center">
-                    {error}
-                </div>
-            )}
+        {error && (
+            <div className="bg-classic-green bg-opacity-10 border border-classic-green text-classic-green p-4 rounded-lg my-5 text-center">
+                {error}
+            </div>
+        )}
 
-            {!isLoading && recommendations.length > 0 && (
+{!isLoading && recommendations.length > 0 && (
                 <div ref={bookRef} className="w-full my-16">
                     <div className="hidden md:block">
-                        <div className="w-screen relative left-1/2 -translate-x-1/2">
+                        <div className="w-full" style={{ transform: 'translateX(25%)' }}>
                           <div className="hidden md:block">
                         <RecommendationBook 
                             recommendations={recommendations}
@@ -489,51 +490,50 @@ function PromptComponent() {
                         </div>
                     </div>
 
-                    <div className="block md:hidden">
-                        <div className="w-full flex flex-col items-center">
-                            <div className="relative w-full max-w-sm h-[480px] overflow-hidden">
-                                <AnimatePresence initial={false} custom={mobileDirection} mode="wait">
-                                    <motion.div
-                                        key={mobileIndex}
-                                        custom={mobileDirection}
-                                        variants={sheetVariants}
-                                        initial="enter"
-                                        animate="center"
-                                        exit="exit"
-                                        transition={{
-                                            x: { type: "spring", stiffness: 300, damping: 30 },
-                                            opacity: { duration: 0.2 }
-                                        }}
-                                        className="absolute w-full h-full p-6 bg-white rounded-lg shadow-md flex flex-col items-center justify-center text-center"
+                <div className="block md:hidden">
+                    <div className="w-full flex flex-col items-center">
+                        <div className="relative w-full max-w-sm h-[480px] overflow-hidden">
+                            <AnimatePresence initial={false} custom={mobileDirection} mode="wait">
+                                <motion.div
+                                    key={mobileIndex}
+                                    custom={mobileDirection}
+                                    variants={sheetVariants}
+                                    initial="enter"
+                                    animate="center"
+                                    exit="exit"
+                                    transition={{
+                                        x: { type: "spring", stiffness: 300, damping: 30 },
+                                        opacity: { duration: 0.2 }
+                                    }}
+                                    className="absolute w-full h-full p-6 bg-white rounded-lg shadow-md flex flex-col items-center justify-center text-center"
+                                >
+                                    <div className="absolute top-2 left-2 text-6xl text-classic-green font-serif">“</div>
+                                    <Link
+                                        href={`/book-details/${recommendations[mobileIndex].id}`}
+                                        className="font-lustria text-lg leading-relaxed text-gray-800 px-4 py-2 cursor-pointer transition-transform duration-300 ease-out hover:scale-105"
+                                        aria-label="View book details for this quote"
                                     >
-                                        <div className="absolute top-2 left-2 text-6xl text-classic-green font-serif">“</div>
-                                        <Link
-                                            href={`/book-details/${recommendations[mobileIndex].id}`}
-                                            className="font-lustria text-lg leading-relaxed text-gray-800 px-4 py-2 cursor-pointer transition-transform duration-300 ease-out hover:scale-105"
-                                            aria-label="View book details for this quote"
-                                        >
-                                            "{recommendations[mobileIndex].highlight}"
-                                        </Link>
-                                        <div className="absolute bottom-2 right-2 text-6xl text-classic-green font-serif">”</div>
-                                    </motion.div>
-                                </AnimatePresence>
-                            </div>
+                                        "{recommendations[mobileIndex].highlight}"
+                                    </Link>
+                                    <div className="absolute bottom-2 right-2 text-6xl text-classic-green font-serif">”</div>
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
 
-                            <div className="flex items-center justify-center space-x-8 mt-4">
-                                <button onClick={handlePrev} disabled={mobileIndex === 0} className="font-sans font-semibold text-classic-green disabled:text-gray-400">
-                                    Previous
-                                </button>
-                                <span className="font-sans text-sm text-gray-500">{mobileIndex + 1} / {recommendations.length}</span>
-                                <button onClick={handleNext} disabled={mobileIndex === recommendations.length - 1} className="font-sans font-semibold text-classic-green disabled:text-gray-400">
-                                    Next
-                                </button>
-                            </div>
+                        <div className="flex items-center justify-center space-x-8 mt-4">
+                            <button onClick={handlePrev} disabled={mobileIndex === 0} className="font-sans font-semibold text-classic-green disabled:text-gray-400">
+                                Previous
+                            </button>
+                            <span className="font-sans text-sm text-gray-500">{mobileIndex + 1} / {recommendations.length}</span>
+                            <button onClick={handleNext} disabled={mobileIndex === recommendations.length - 1} className="font-sans font-semibold text-classic-green disabled:text-gray-400">
+                                Next
+                            </button>
                         </div>
                     </div>
                 </div>
-            )}
-        </div>
-    </main>
+            </div>
+        )}
+    </div>
   );
 }
 

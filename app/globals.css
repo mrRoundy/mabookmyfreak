@@ -12,6 +12,7 @@ body {
     background-color: #FCF9F6;
     color: #504646;
     font-family: var(--font-inter), sans-serif;
+    overflow-y: scroll;
 }
 
 h1, h2, h3, h4, h5, h6 {
